@@ -26,8 +26,6 @@ SECRET_KEY = 'django-insecure-_j@kxljkr@0o&s6j2g@f(9=%^uvfawi#)g09hv&1ttdn6=2!93
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  '.ap-northeast-2.compute.amazonaws.com',
-  'localhost',
   'teaming5.shop'
 ]
 
@@ -87,7 +85,7 @@ CORS_ALLOWD_ORIGIN = [
     'https://teaming5.netlify.app',
 ]
 
-CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000')
+CORS_ORIGIN_WHITELIST = ('https://teaming5.netlify.app')
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'Orb.urls'
