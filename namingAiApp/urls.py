@@ -13,14 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('recommend.urls')),
-    # path('api/', include('vote.urls')),
-    path('api/wordcloud/',include('wordcloud.urls')),
-    path('api/',include('recbyinput.urls')),
-    path('api/teamnames/ai/', include("namingAiApp.urls")),
+    path('', views.Recommendations.as_view()),
 ]
