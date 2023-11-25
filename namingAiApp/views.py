@@ -5,6 +5,8 @@ import os
 import json
 import openai
 from openai import OpenAI
+from wordcloud.models import Wordcloud
+from wordcloud.serializers import WordSerializer
 
 client = OpenAI(
   api_key=os.environ.get('OPENAI_API_KEY'),
@@ -27,6 +29,7 @@ class Recommendations(APIView):
     except openai.APIConnectionError as e:
       raise ParseError("OpenAI 서버에 접근 불가")
     except openai.APIError as e:
+      print(e.message)
       raise ParseError("서버 내 오류")
 
     response = chat_completion.choices[0].message.content
@@ -55,7 +58,12 @@ class Recommendations(APIView):
     ]
 
     data = self.request_json_teamnames(messages)
-
+    teamnames = data['teamnames']
+    
+    for teamname in teamnames:
+      new_instance=Wordcloud(word=teamname)
+      new_instance.save()
+      
     return Response({
-      "teamnames": data['teamnames']
+      "teamnames": teamnames
     })
