@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
+from rest_framework.generics import get_object_or_404
 import os
 import json
 import openai
@@ -61,8 +62,14 @@ class Recommendations(APIView):
     teamnames = data['teamnames']
     
     for teamname in teamnames:
-      new_instance=Wordcloud(word=teamname)
-      new_instance.save()
+      try:
+        word = get_object_or_404(Wordcloud, word=teamname)
+        word.likes+=1
+        word.save()
+      except:
+        new_instance=Wordcloud(word=teamname)
+        new_instance.save()
+
       
     return Response({
       "teamnames": teamnames
