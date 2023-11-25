@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
   '.ap-northeast-2.compute.amazonaws.com',
-  'localhost'
+  'localhost',
+  'teaming5.shop'
 ]
 
 
