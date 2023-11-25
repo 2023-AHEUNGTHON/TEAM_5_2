@@ -11,7 +11,7 @@ from .serializers import WordcloudSerializer, WordSerializer
 class WordcloudView(APIView):
     def get(self, request):
         wordcloud = Wordcloud.objects.all().order_by('-likes')[:100]
-        serializer = WordcloudSerializer(wordcloud, many=True)
+        serializer = WordSerializer(wordcloud, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class WordView(APIView):
@@ -19,7 +19,7 @@ class WordView(APIView):
         word = get_object_or_404(Wordcloud, word=pk)
         serializer = WordSerializer(word)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    def put(self, reqeust, pk):
+    def patch(self, reqeust, pk):
         word = get_object_or_404(Wordcloud, word=pk)
         word.likes+=1
         word.save()
